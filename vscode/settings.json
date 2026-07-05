@@ -1,0 +1,254 @@
+{
+  // ===================================================================
+  // PERFORMANCE: stop VS Code from watching/indexing/searching huge
+  // dependency & build folders. This is the single biggest "make
+  // everything faster" lever in settings.json, and it applies to
+  // every language at once.
+  // ===================================================================
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/__pycache__/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/target/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/out/**": true,
+    "**/.next/**": true,
+    "**/.terraform/**": true,
+    "**/vendor/**": true,
+    "**/bin/**": true,
+    "**/obj/**": true,
+    "**/.gradle/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.venv": true,
+    "**/venv": true,
+    "**/__pycache__": true,
+    "**/target": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.next": true,
+    "**/vendor": true,
+    "**/package-lock.json": true,
+    "**/*.lock": true
+  },
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true
+  },
+  "git.autofetch": false,
+  "npm.fetchOnlinePackageInfo": false,
+  "workbench.editor.enablePreview": false,
+  "editor.minimap.enabled": false,
+  // ===================================================================
+  // EDITOR / INTELLISENSE: this block is the actual fix for the
+  // "Pylance knows the symbol but won't suggest the import" issue from
+  // your notes. Nothing was broken in your env, VS Code's suggestion
+  // engine just wasn't surfacing third-party auto-imports. This turns
+  // it on properly, for every language, not just Python.
+  // ===================================================================
+  "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
+  "editor.wordBasedSuggestions": "allDocuments",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.suggestSelection": "first",
+  "diffEditor.ignoreTrimWhitespace": false,
+  // ===================================================================
+  // PYTHON / PYLANCE
+  // ===================================================================
+  "python.languageServer": "Pylance",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.indexing": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+  // "" (empty name) = the default depth/symbols applied to EVERY
+  // package. This was the missing piece — it's why BaseSettings from
+  // pydantic_settings never showed up as a suggestion. Named entries
+  // below go deeper for libraries you use constantly.
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "pydantic",
+      "depth": 3,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "pydantic_settings",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "fastapi",
+      "depth": 2,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "django",
+      "depth": 3,
+      "includeAllSymbols": true
+    },
+    {
+      "name": "sqlalchemy",
+      "depth": 3,
+      "includeAllSymbols": true
+    }
+  ],
+  // "default" is fine for most repos. Use "light" on a huge/slow repo,
+  // or "full" for maximum auto-import coverage at the cost of a slower
+  // first index.
+  "python.analysis.languageServerMode": "default",
+  "python.REPL.enableREPLSmartSend": false,
+  "python.REPL.sendToNativeREPL": false,
+  "python.createEnvironment.trigger": "off",
+  // ===================================================================
+  // GO
+  // ===================================================================
+  "go.toolsManagement.autoUpdate": true,
+  "go.useLanguageServer": true,
+  "go.formatTool": "goimports",
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "package",
+  // ===================================================================
+  // JAVA
+  // ===================================================================
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.project.sourcePaths": [
+    "src/main/java"
+  ],
+  "java.jdt.ls.vmargs": "-Xmx2G -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Xms100m",
+  // ===================================================================
+  // JAVASCRIPT / TYPESCRIPT
+  // VS Code recently merged all JS/TS settings into one shared "js/ts"
+  // namespace (part of the TS-Go work). The old javascript.*/typescript.*
+  // keys still work but are deprecated — these are the current names.
+  // ===================================================================
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.tsserver.maxMemory": 4096,
+  // ===================================================================
+  // DOCKER
+  // ===================================================================
+  "docker.extension.dockerEngineAvailabilityPrompt": false,
+  // ===================================================================
+  // YAML: the shared config format for k8s, docker-compose, GitHub
+  // Actions, Helm values, Kafka Connect / Dagster / Flink job configs.
+  // Adjust the "kubernetes" glob to match where your manifests live.
+  // ===================================================================
+  "yaml.schemaStore.enable": true,
+  "yaml.schemas": {
+    "kubernetes": [
+      "k8s/**/*.yaml",
+      "kubernetes/**/*.yaml",
+      "*.k8s.yaml",
+      "deployment*.yaml"
+    ],
+    "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "docker-compose*.yml",
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
+  },
+  // ===================================================================
+  // FORMATTERS: one explicit formatter per language. Nothing silently
+  // falls back to a different engine than the one you actually use.
+  // ===================================================================
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.tabSize": 2
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always"
+    }
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true
+  },
+  "[properties]": {
+    "editor.tabSize": 2
+  },
+  "prettier.tabWidth": 4,
+  // ===================================================================
+  // FILE HYGIENE
+  // ===================================================================
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  // ===================================================================
+  // GIT / EXPLORER / WORKSPACE TRUST
+  // ===================================================================
+  "git.ignoreMissingGitWarning": true,
+  "git.openRepositoryInParentFolders": "never",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  // ===================================================================
+  // TODO TREE: its bundled ripgrep sometimes fails to unpack. Point it at
+  // the Homebrew ripgrep this workstation installs (Apple Silicon path).
+  // ===================================================================
+  "todo-tree.ripgrep.ripgrep": "/opt/homebrew/bin/rg",
+  // ===================================================================
+  // KEPT AS-IS FROM YOUR ORIGINAL
+  // ===================================================================
+  "redhat.telemetry.enabled": true,
+  "terminal.integrated.env.osx": {
+    "Q_NEW_SESSION": "1"
+  },
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "jupyter.askForKernelRestart": false,
+  "makefile.configureOnOpen": false,
+  "chat.viewSessions.orientation": "stacked",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:claude-opus-4.6",
+  "extensions.ignoreRecommendations": true
+}
