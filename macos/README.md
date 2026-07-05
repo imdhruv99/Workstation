@@ -1,8 +1,9 @@
 # macOS Workstation Setup
 
-Production-quality **Ghostty + zsh** environment for a Machine Learning / DevOps
-workflow: modular zsh config, fast startup, fuzzy navigation, syntax highlighting,
-autosuggestions, and best-in-class modern CLI tooling.
+Production-quality **Ghostty + zsh** environment for software development,
+full-stack engineering, AI, Machine Learning, Deep Learning, Big Data, and
+DevOps workflows: modular zsh config, fast startup, fuzzy navigation, syntax
+highlighting, autosuggestions, and best-in-class modern CLI tooling.
 
 > Everything here mirrors its real target location, so installation is a plain copy:
 > `macos/home/` → `~/` and `macos/config/` → `~/.config/`, then run one script.

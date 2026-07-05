@@ -2,7 +2,8 @@
 
 My personal, reproducible development environment - a version-controlled set of
 dotfiles and setup scripts that turn a fresh machine into a fully-configured
-Machine Learning / DevOps workstation with a single copy-and-run.
+workstation for software development, full-stack engineering, AI, Machine
+Learning, Deep Learning, Big Data, and DevOps with a single copy-and-run.
 
 ---
 
