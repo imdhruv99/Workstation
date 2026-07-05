@@ -26,12 +26,19 @@ you can't live without. This repo makes the environment:
 
 ## Repository structure
 
-Each top-level folder targets one platform. The internal layout mirrors where
-files actually live on disk, so installation is a plain copy plus one script.
+Most folders target one platform; `vscode/` is shared across all of them. The
+internal layout mirrors where files actually live on disk, so installation is a
+plain copy (or symlink) plus one script.
 
 ```
 Workstation/
 ├── README.md          # you are here — overview + motive
+├── vscode/            # cross-OS VS Code setup (settings + extensions)
+│   ├── README.md      # install per OS, what's configured, extension list
+│   ├── settings.json  # shared editor/language settings
+│   ├── extensions.txt # curated extension list (all work areas)
+│   ├── install.sh     # macOS / Linux installer
+│   └── install.ps1    # Windows installer
 └── macos/             # macOS setup (Ghostty + zsh)
     ├── README.md      # full install guide, architecture, troubleshooting
     ├── CHEATSHEET.md  # every alias/function/key + "where to add new things"
@@ -45,9 +52,10 @@ Workstation/
 
 | Platform | Status | Docs |
 |---|---|---|
+| **VS Code** (all OSes) | ✅ Complete | [vscode/README.md](vscode/README.md) |
 | **macOS** (Apple Silicon / Intel) | ✅ Complete | [macos/README.md](macos/README.md) · [macos/CHEATSHEET.md](macos/CHEATSHEET.md) |
-| Linux | ⏳ Planned | — |
-| Windows | ⏳ Planned | — |
+| Linux (shell) | ⏳ Planned | — |
+| Windows (shell) | ⏳ Planned | — |
 
 ---
 
@@ -71,10 +79,24 @@ architecture, verification checklist, troubleshooting, and rollback steps.
 
 ---
 
+## Quick start (VS Code - any OS)
+
+```bash
+bash vscode/install.sh                  # macOS / Linux
+# Windows (PowerShell):
+# powershell -ExecutionPolicy Bypass -File vscode\install.ps1
+```
+
+Installs the shared `settings.json` and every recommended extension. See
+[vscode/README.md](vscode/README.md) for what's configured and per-OS paths.
+
+---
+
 ## Documentation
 
 | Doc | Contents |
 |---|---|
+| [vscode/README.md](vscode/README.md) | Cross-OS VS Code install, configured settings, curated extension list by work area |
 | [macos/README.md](macos/README.md) | Install, config architecture, load-order rules, troubleshooting, rollback |
 | [macos/CHEATSHEET.md](macos/CHEATSHEET.md) | Full command reference (short form → actual command) + where to add new aliases/PATH/env/tools |
 

@@ -1,0 +1,73 @@
+# VS Code recommended extensions - one id per line, grouped by area.
+# Lines starting with '#' and blank lines are ignored by the installer.
+# Curated for speed + reliability: only official / well-maintained extensions,
+# no overlapping duplicates. Works identically on macOS, Linux, and Windows.
+
+# --- Editor & Git (core) -----------------------------------------------------
+# Note: GitHub Copilot + Copilot Chat ship built-in with current VS Code, so
+# they are intentionally NOT listed here (installing over a built-in fails).
+eamodio.gitlens
+github.vscode-pull-request-github
+pkief.material-icon-theme
+editorconfig.editorconfig
+usernamehw.errorlens
+christian-kohler.path-intellisense
+gruntfuggly.todo-tree
+
+# --- Python / AI / Machine Learning / Deep Learning --------------------------
+ms-python.python
+ms-python.vscode-pylance
+ms-python.debugpy
+ms-python.autopep8
+ms-python.vscode-python-envs
+charliermarsh.ruff
+njpwerner.autodocstring
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+ms-toolsai.tensorboard
+ms-toolsai.datawrangler
+
+# --- Web / Full-stack --------------------------------------------------------
+esbenp.prettier-vscode
+dbaeumer.vscode-eslint
+formulahendry.auto-rename-tag
+
+# --- Go ----------------------------------------------------------------------
+golang.go
+
+# --- Java --------------------------------------------------------------------
+vscjava.vscode-java-pack
+redhat.java
+
+# --- C / C++ -----------------------------------------------------------------
+ms-vscode.cpptools-extension-pack
+
+# --- Build / general dev -----------------------------------------------------
+ms-vscode.makefile-tools
+redhat.vscode-xml
+davidanson.vscode-markdownlint
+
+# --- DevOps / Cloud / IaC ----------------------------------------------------
+ms-azuretools.vscode-docker
+ms-kubernetes-tools.vscode-kubernetes-tools
+hashicorp.terraform
+redhat.vscode-yaml
+github.vscode-github-actions
+
+# --- Big Data / SQL / data files ---------------------------------------------
+mtxr.sqltools
+mtxr.sqltools-driver-pg
+mtxr.sqltools-driver-mysql
+mtxr.sqltools-driver-sqlite
+mechatroner.rainbow-csv
+
+# --- Shell / config formats --------------------------------------------------
+timonwong.shellcheck
+foxundermoon.shell-format
+tamasfe.even-better-toml
+
+# --- Remote development (cross-OS: SSH, Dev Containers, WSL, Tunnels) ---------
+ms-vscode-remote.vscode-remote-extensionpack
