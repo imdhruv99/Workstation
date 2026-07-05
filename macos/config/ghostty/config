@@ -1,0 +1,66 @@
+# ~/.config/ghostty/config - Ghostty terminal configuration.
+# Reload in-app with Cmd+Shift+, ; docs: https://ghostty.org/docs/config
+
+# ============================== Appearance ===================================
+theme = catppuccin-mocha
+background-opacity = 0.96
+background-blur = 20
+window-padding-x = 10
+window-padding-y = 8
+# Hide the macOS title bar chrome but keep native window controls.
+macos-titlebar-style = tabs
+
+# ============================== Font =========================================
+# JetBrainsMono Nerd Font provides ligatures + powerline/dev glyphs for starship.
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+# Ligatures on (calt/liga). Set to "" to disable if you dislike them.
+font-feature = "calt"
+font-feature = "liga"
+font-thicken = true          # slightly heavier glyphs; crisper on non-Retina
+
+# ============================== Cursor =======================================
+cursor-style = block
+cursor-style-blink = false   # steady cursor = less distraction, tiny perf win
+shell-integration-features = cursor,sudo,title
+
+# ============================== Scrollback / mouse ===========================
+scrollback-limit = 100000    # generous history for long training/log output
+mouse-hide-while-typing = true
+copy-on-select = clipboard   # selecting text copies it (tmux/iTerm-like)
+click-repeat-interval = 300
+
+# ============================== Shell integration ============================
+# Auto-injects prompt marks, cwd reporting, and jump-between-prompts support.
+shell-integration = zsh
+
+# ============================== Window / tabs ================================
+window-save-state = always   # restore windows/tabs after quit+relaunch
+confirm-close-surface = false
+window-new-tab-position = end
+# Open new splits/tabs in the current terminal's working directory.
+window-inherit-working-directory = true
+window-inherit-font-size = true
+
+# ============================== Keybindings ==================================
+# Splits (Cmd+D vertical, Cmd+Shift+D horizontal) — iTerm-style muscle memory.
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+# Navigate splits with Cmd+Alt+Arrows.
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+right=goto_split:right
+keybind = cmd+alt+up=goto_split:up
+keybind = cmd+alt+down=goto_split:down
+# Zoom the focused split.
+keybind = cmd+shift+enter=toggle_split_zoom
+# Tabs.
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface
+keybind = cmd+shift+left=previous_tab
+keybind = cmd+shift+right=next_tab
+# Quick font-size reset.
+keybind = cmd+zero=reset_font_size
+# Reload config without restarting.
+keybind = cmd+shift+comma=reload_config
+# Clear screen + scrollback.
+keybind = cmd+k=clear_screen
