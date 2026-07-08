@@ -21,6 +21,9 @@ command -v dust >/dev/null 2>&1 && alias du='dust'
 command -v duf  >/dev/null 2>&1 && alias df='duf'
 command -v btop >/dev/null 2>&1 && alias top='btop'
 
+# --- Linux muscle-memory: `ss` is Linux-only; map it to native socket tools ---
+alias ss='lsof -i -P -n'          # sockets/ports overview (BSD-native)
+
 # --- Navigation ---------------------------------------------------------------
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -41,5 +44,5 @@ alias zconf='cd "$ZDOTDIR/conf.d"'
 # --- Misc ---------------------------------------------------------------------
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%Y-%m-%d %H:%M:%S"'
-alias ip='curl -s ifconfig.me; echo'
+alias myip='curl -s ifconfig.me; echo'   # public IP (frees `ip` for iproute2mac)
 alias please='sudo $(fc -ln -1)'   # re-run last command with sudo

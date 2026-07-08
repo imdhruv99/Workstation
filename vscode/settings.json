@@ -45,7 +45,7 @@
     "**/.pytest_cache": true,
     "**/.ruff_cache": true
   },
-  "git.autofetch": false,
+  "git.autofetch": true,
   "npm.fetchOnlinePackageInfo": false,
   "workbench.editor.enablePreview": false,
   "editor.minimap.enabled": false,
@@ -73,7 +73,10 @@
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.indexing": true,
-  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+  // NOTE: no global "python.defaultInterpreterPath" — a hard-coded
+  // "${workspaceFolder}/venv/bin/python" warns in every non-Python folder.
+  // The Python extension auto-detects .venv/venv per project; set a specific
+  // interpreter per-project in <project>/.vscode/settings.json if ever needed.
   // "" (empty name) = the default depth/symbols applied to EVERY
   // package. This was the missing piece — it's why BaseSettings from
   // pydantic_settings never showed up as a suggestion. Named entries
@@ -250,5 +253,6 @@
   "chat.viewSessions.orientation": "stacked",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-opus-4.6",
-  "extensions.ignoreRecommendations": true
+  "extensions.ignoreRecommendations": true,
+  "githubPullRequests.pullBranch": "never"
 }

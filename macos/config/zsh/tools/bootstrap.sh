@@ -30,6 +30,11 @@ REQUIRED_FORMULAE=(
 OPTIONAL_FORMULAE=(
   btop procs dust duf tldr fast-syntax-highlighting
 )
+# Basic/GNU utilities a Linux user expects on macOS. `ss` has no macOS port
+# (Linux-only iproute2); iproute2mac provides `ip`, and 70-aliases maps `ss`.
+BASIC_UTILITIES=(
+  tree wget watch htop pstree telnet coreutils moreutils iproute2mac
+)
 
 log "Updating Homebrew…"
 brew update >/dev/null || warn "brew update failed (continuing with cached state)."
@@ -49,6 +54,9 @@ for f in "${REQUIRED_FORMULAE[@]}"; do install_formula "$f"; done
 
 log "Installing optional formulae…"
 for f in "${OPTIONAL_FORMULAE[@]}"; do install_formula "$f"; done
+
+log "Installing basic utilities…"
+for f in "${BASIC_UTILITIES[@]}"; do install_formula "$f"; done
 
 # --------------------------------------------------------- nerd font ---------
 if brew list --cask font-jetbrains-mono-nerd-font >/dev/null 2>&1; then
