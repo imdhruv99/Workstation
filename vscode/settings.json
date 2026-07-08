@@ -73,6 +73,7 @@
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.indexing": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
   // NOTE: no global "python.defaultInterpreterPath" — a hard-coded
   // "${workspaceFolder}/venv/bin/python" warns in every non-Python folder.
   // The Python extension auto-detects .venv/venv per project; set a specific
