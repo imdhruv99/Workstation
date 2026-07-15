@@ -25,6 +25,7 @@ REQUIRED_FORMULAE=(
   atuin direnv
   kubectx k9s stern
   uv pipx
+  fnm
 )
 # Optional / nice-to-have (comment out any you don't want).
 OPTIONAL_FORMULAE=(
@@ -57,6 +58,24 @@ for f in "${OPTIONAL_FORMULAE[@]}"; do install_formula "$f"; done
 
 log "Installing basic utilities…"
 for f in "${BASIC_UTILITIES[@]}"; do install_formula "$f"; done
+
+# --------------------------------------------------------- node / npm --------
+# fnm is the version manager; install an LTS Node so `node`/`npm` are available.
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env)" 2>/dev/null || true
+  if fnm ls 2>/dev/null | grep -q 'lts'; then
+    ok "Node LTS already installed via fnm"
+  else
+    log "installing Node LTS via fnm…"
+    if fnm install --lts && fnm default lts-latest; then
+      ok "installed Node LTS ($(fnm exec --using=lts-latest node -v 2>/dev/null))"
+    else
+      warn "fnm install --lts failed (run it manually later)."
+    fi
+  fi
+else
+  warn "fnm not found; skipped Node install (npm will be unavailable)."
+fi
 
 # --------------------------------------------------------- nerd font ---------
 if brew list --cask font-jetbrains-mono-nerd-font >/dev/null 2>&1; then

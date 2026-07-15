@@ -32,6 +32,14 @@ if command -v jenv >/dev/null 2>&1; then
   jenv() { unfunction jenv; eval "$(command jenv init -)"; jenv "$@"; }
 fi
 
+# --- fnm (Node.js / npm) ------------------------------------------------------
+# fnm env is fast (Rust), so init directly. `--use-on-cd` auto-switches the
+# Node version when you cd into a dir with a .nvmrc / .node-version file.
+# Install a Node version to get `node`/`npm`:  fnm install --lts
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
 # --- tfenv (Terraform version manager) ---------------------------------------
 # tfenv is a shim on PATH already via brew; nothing to init, kept for clarity.
 

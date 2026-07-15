@@ -39,7 +39,7 @@ for t in btop procs dust duf tldr; do
 done
 
 hdr "Existing integrations"
-for t in git pyenv jenv tfenv kubectl gcloud; do
+for t in git pyenv jenv tfenv kubectl gcloud fnm node npm; do
   command -v "$t" >/dev/null 2>&1 && ok "found: $t" || warn "not found: $t"
 done
 

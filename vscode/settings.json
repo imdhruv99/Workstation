@@ -251,7 +251,6 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "jupyter.askForKernelRestart": false,
   "makefile.configureOnOpen": false,
-  "chat.viewSessions.orientation": "stacked",
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:claude-opus-4.6",
   "extensions.ignoreRecommendations": true,
@@ -263,5 +262,6 @@
     "**/.gitea/workflows/*.yaml",
     "**/.forgejo/workflows/*.yml",
     "**/.forgejo/workflows/*.yaml"
-  ]
+  ],
+  "chat.viewSessions.orientation": "stacked"
 }
