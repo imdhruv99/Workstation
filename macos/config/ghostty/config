@@ -2,7 +2,7 @@
 # Reload in-app with Cmd+Shift+, ; docs: https://ghostty.org/docs/config
 
 # ============================== Appearance ===================================
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 background-opacity = 0.96
 background-blur = 20
 window-padding-x = 10
@@ -17,17 +17,21 @@ font-size = 14
 # Ligatures on (calt/liga). Set to "" to disable if you dislike them.
 font-feature = "calt"
 font-feature = "liga"
-font-thicken = true          # slightly heavier glyphs; crisper on non-Retina
+# Slightly heavier glyphs; crisper on non-Retina.
+font-thicken = true
 
 # ============================== Cursor =======================================
 cursor-style = block
-cursor-style-blink = false   # steady cursor = less distraction, tiny perf win
+# Steady cursor = less distraction, tiny perf win.
+cursor-style-blink = false
 shell-integration-features = cursor,sudo,title
 
 # ============================== Scrollback / mouse ===========================
-scrollback-limit = 100000    # generous history for long training/log output
+# Generous history for long training/log output.
+scrollback-limit = 100000
 mouse-hide-while-typing = true
-copy-on-select = clipboard   # selecting text copies it (tmux/iTerm-like)
+# Selecting text copies it (tmux/iTerm-like).
+copy-on-select = clipboard
 click-repeat-interval = 300
 
 # ============================== Shell integration ============================
@@ -35,7 +39,8 @@ click-repeat-interval = 300
 shell-integration = zsh
 
 # ============================== Window / tabs ================================
-window-save-state = always   # restore windows/tabs after quit+relaunch
+# Restore windows/tabs after quit+relaunch.
+window-save-state = always
 confirm-close-surface = false
 window-new-tab-position = end
 # Open new splits/tabs in the current terminal's working directory.
