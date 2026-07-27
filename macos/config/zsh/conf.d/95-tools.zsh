@@ -6,24 +6,32 @@ if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
-# --- pyenv (lazy) -------------------------------------------------------------
-# pyenv init is slow; defer it until first use of pyenv/python/pip.
+# --- pyenv --------------------------------------------------------------------
+# Add pyenv's shims to PATH eagerly. This is cheap (just a PATH prepend) and,
+# crucially, must happen BEFORE any venv is activated: `source venv/bin/activate`
+# prepends venv/bin AHEAD of the shims, so an active venv always wins.
+#
+# Do NOT wrap python/pip as lazy functions: a shell function shadows PATH, so
+# the first `python` call inside a venv would trigger `pyenv init -`, which
+# re-prepends the shims in front of the venv and breaks it until you
+# deactivate/reactivate. Only the heavier interactive init stays lazy, behind
+# the `pyenv` command itself (completions / virtualenv hooks).
 if command -v pyenv >/dev/null 2>&1; then
   export PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
   path=("$PYENV_ROOT/bin" $path)
-  _lazy_pyenv() {
-    unalias pyenv python python3 pip pip3 2>/dev/null
-    unfunction pyenv python python3 pip pip3 2>/dev/null
+  _pyenv_path="$(pyenv init --path 2>/dev/null)"
+  if [[ -n "$_pyenv_path" ]]; then
+    eval "$_pyenv_path"                 # modern pyenv: prepends shims to PATH
+  else
+    path=("$PYENV_ROOT/shims" $path)    # fallback for very old pyenv
+  fi
+  unset _pyenv_path
+  pyenv() {
+    unfunction pyenv
     eval "$(pyenv init - zsh)"
     command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init - zsh)"
+    pyenv "$@"
   }
-  for _cmd in pyenv python python3 pip pip3; do
-    # An existing alias (e.g. `pip` from 90-ml.zsh) blocks a same-name function,
-    # so drop any alias before defining the lazy wrapper.
-    unalias "$_cmd" 2>/dev/null
-    eval "${_cmd}() { _lazy_pyenv; ${_cmd} \"\$@\"; }"
-  done
-  unset _cmd
 fi
 
 # --- jenv (Java, lazy) --------------------------------------------------------
